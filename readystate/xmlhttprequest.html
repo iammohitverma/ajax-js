@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="box"></div>
+    <button>Click Me</button>
+
+    <script>
+        let button = document.querySelector("button");
+        button.onclick = () => {
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let boxHtml = this.responseText;
+                    console.log(boxHtml);
+                    document.querySelector(".box").innerHTML = boxHtml;
+                } else if (this.readyState == 4 && this.status == 404) {
+                    console.log("Data not found");
+                }
+            };
+            xhttp.open("GET", "./box_data.html");
+            xhttp.send();
+        }
+    </script>
+
+</body>
+
+</html>
